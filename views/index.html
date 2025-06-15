@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-slate-950 text-white">
+    <h1 id="cpuLoad">CPU Load:</h1>
+    <h1 id="usedMem">Used Mem:</h1>
+    <h1 id="totalMem">Total Mem:</h1>
+    <h1 id="usedDisk">Used Disk:</h1>
+    <h1 id="totalDisk">Total Disk:</h1>
+    <script>
+      const api = "http://localhost:3000/data";
+
+      async function getData() {
+        const response = await fetch(api);
+        const json = await response.json();
+
+        document.getElementById(
+          "cpuLoad"
+        ).textContent = `CPU Load: ${json.cpuLoad}%`;
+        document.getElementById(
+          "usedMem"
+        ).textContent = `Used Mem: ${json.usedMem} GiB`;
+        document.getElementById(
+          "totalMem"
+        ).textContent = `Total Mem: ${json.totalMem} GiB`;
+        document.getElementById(
+          "usedDisk"
+        ).textContent = `Used Disk: ${json.usedDisk} GiB`;
+        document.getElementById(
+          "totalDisk"
+        ).textContent = `Total Disk: ${json.totalDisk} GiB`;
+      }
+      setInterval(getData, 1000);
+    </script>
+  </body>
+</html>
