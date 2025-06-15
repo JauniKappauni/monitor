@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static("views"));
 
 app.get("/data", async (req, res) => {
   const [load, mem, disk] = await Promise.all([
